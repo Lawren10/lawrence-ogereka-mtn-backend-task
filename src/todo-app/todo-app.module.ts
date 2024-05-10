@@ -10,9 +10,19 @@ import { User } from './database/tables/usersTable';
 import { Todo } from './database/tables/todoTable';
 import { TodoTasks } from './database/tables/taskTable';
 import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { AuthStrategy } from './auth/strategies/auth.strategy';
+import { AuthService } from './auth/auth.service';
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    PassportModule,
+    JwtModule.register({
+      secret: 'TO_DO_APP',
+      signOptions: { expiresIn: '1h' },
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
@@ -25,6 +35,13 @@ import { ConfigModule } from '@nestjs/config';
     }),
   ],
   controllers: [UsersController, TodoController, TasksController],
-  providers: [UsersService, TodoService, TasksService],
+  providers: [
+    AuthStrategy,
+    JwtStrategy,
+    UsersService,
+    TodoService,
+    TasksService,
+    AuthService,
+  ],
 })
 export class TodoAppModule {}
