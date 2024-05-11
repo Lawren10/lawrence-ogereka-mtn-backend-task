@@ -21,7 +21,7 @@ export class Todo {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column({ unique: true, nullable: false, name: 'userId' })
+  @Column({ nullable: false, name: 'userId' })
   userId: string;
 
   @ManyToOne(() => User, (user) => user.todos, { onDelete: 'CASCADE' })

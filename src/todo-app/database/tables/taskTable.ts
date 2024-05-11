@@ -22,7 +22,7 @@ export class TodoTasks {
   @Column({ default: 'pending' })
   status: string;
 
-  @Column({ unique: true, nullable: false, name: 'todoId' })
+  @Column({ nullable: false, name: 'todoId' })
   todoId: string;
 
   @Column({ nullable: false })

@@ -22,6 +22,7 @@ export class CreateTaskDetails {
       'Status of the task and should be either pending or completed ',
   })
   @IsString()
+  @IsNotEmpty()
   status: string;
 
   @ApiProperty()
