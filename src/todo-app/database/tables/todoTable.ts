@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -20,9 +21,13 @@ export class Todo {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.todos)
+  @Column({ unique: true, nullable: false, name: 'userId' })
+  userId: string;
+
+  @ManyToOne(() => User, (user) => user.todos, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
   user: User;
 
-  @OneToMany(() => TodoTasks, (task) => task.todo)
+  @OneToMany(() => TodoTasks, (task) => task.todo, { eager: true })
   tasks: TodoTasks[];
 }

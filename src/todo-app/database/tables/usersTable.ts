@@ -13,7 +13,7 @@ export class User {
   id: string;
 
   @Column({ unique: true, nullable: false })
-  name: string;
+  username: string;
 
   @Column({ unique: true, nullable: false })
   email: string;
@@ -24,6 +24,6 @@ export class User {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => Todo, (todo) => todo.user)
+  @OneToMany(() => Todo, (todo) => todo.user, { eager: true })
   todos: Todo[];
 }

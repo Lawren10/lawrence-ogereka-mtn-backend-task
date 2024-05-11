@@ -10,7 +10,7 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
   }
 
   //the validateUser function will be called using the authenticate user function in the service to authenicte the user from the jwt token from the request header before handling futher operations.
-  validateUser(username: string, password: string) {
-    this.authService.authenticateUser({ username, password });
+  validate(username: string, password: string) {
+    return this.authService.authenticateUser({ username, password });
   }
 }

@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -18,8 +19,11 @@ export class TodoTasks {
   @Column({ nullable: true })
   description: string;
 
-  @Column({ default: false })
-  completed: boolean;
+  @Column({ default: 'pending' })
+  status: string;
+
+  @Column({ unique: true, nullable: false, name: 'todoId' })
+  todoId: string;
 
   @Column({ nullable: false })
   dueDate: Date;
@@ -27,6 +31,7 @@ export class TodoTasks {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => Todo, (todo) => todo.tasks)
+  @ManyToOne(() => Todo, (todo) => todo.tasks, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'todoId' })
   todo: Todo;
 }

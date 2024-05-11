@@ -20,8 +20,8 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     ConfigModule.forRoot(),
     PassportModule,
     JwtModule.register({
-      secret: 'TO_DO_APP',
-      signOptions: { expiresIn: '1h' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.WT_EXPIRATION_TIME },
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -33,6 +33,7 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
       entities: [User, Todo, TodoTasks],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([User, Todo, TodoTasks]),
   ],
   controllers: [UsersController, TodoController, TasksController],
   providers: [

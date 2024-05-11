@@ -1,73 +1,249 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# TODO APP TASK
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### This document describes a Todo backend API built with NestJS, providing functionalities for managing user authentication,create a todo and add task items to the todo. Swagger is used for API documentation, JWT for user authentication, and TypeORM for interacting with a database(MYSQL).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## SETUP
+### Prerequisites and Installation
 
-## Description
+### Steps:
+- Clone this repository.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ yarn install
+- #### Environment Variables
+  - Create a .env file in the project root to store sensitive information:
+  -   Include the following variables (replace placeholders with your actual values):
 ```
 
-## Running the app
+ DATABASE_HOST=localhost
+ DATABASE_PORT=3306
+ DATABASE_USERNAME=your_username
+ DATABASE_PASSWORD=your_password
+ DATABASE_NAME=todo_db
+ JWT_SECRET=your_jwt_secret (strong, random string for JWT signing)
+ JWT_EXPIRATION_TIME=3600 (in seconds, e.g., 3600 for 1 hour)
 
+ ```
+- Install dependencies :
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+npm install
+OR
+yarn install
 ```
-
-## Test
-
+- Run the application:
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+npm run start:dev
+OR
+yarn start:dev
 ```
+- Access the API documentation at http://localhost:3000/api/.
+- Use tools like Postman to send requests and test API functionality or use the intergrated Swagger UI, but with limited functionality, to test API endpoints.(Advice to use postman for testing API endpoints).
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## API ENDPOINTS
+The main API endpoints are:
+<table>
+<thead>
+  <tr>
+  <th>
+  Endpoints
+  </th>
+  <th>
+  Methods
+  </th>
+  <th>
+  Descriptions
+  </th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  /user/register  
+  </td>
+  <td>
+  POST
+  </td>
+  <td>
+  Register or create a new user
+  </td>
+  </tr>
 
-## Stay in touch
+  <tr>
+<td>
+  /user/login  
+  </td>
+  <td>
+  POST
+  </td>
+  <td>
+  Authenticate and login user using jwt, note attach the authToken to the request header auth field for future authentication;
+  </td>
+  </tr>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   <tr>
+<td>
+  /user/logout  
+  </td>
+  <td>
+ GET
+  </td>
+  <td>
+  logsout the current user but note, you have to remove the auth token from the client side to prevent future authentication
+  </td>
+  </tr>
 
-## License
+  <tr>
+<td>
+  /user/todo  
+  </td>
+  <td>
+  GET
+  </td>
+  <td>
+  Retrives all todos for the authenticated user.
+  </td>
+  </tr>
 
-Nest is [MIT licensed](LICENSE).
+  <tr>
+<td>
+  /todo/create  
+  </td>
+  <td>
+  POST
+  </td>
+  <td>
+   Creates a new todo. 
+  </td>
+  </tr>
+
+  <tr>
+<td>
+  /todo/id  
+  </td>
+  <td>
+  GET
+  </td>
+  <td>
+   Retrives a single todo by id.
+  </td>
+  </tr>
+
+<tr>
+<td>
+  /todo/update/id 
+  </td>
+  <td>
+  PUT
+  </td>
+  <td>
+   update a single todo by id.
+  </td>
+  </tr>
+
+  <tr>
+<td>
+  /todo/delete/id 
+  </td>
+  <td>
+  DELETE
+  </td>
+  <td>
+   Deletes a single todo by id.
+  </td>
+  </tr>
+
+  <tr>
+<td>
+  /tasks/create/
+  </td>
+  <td>
+  POST
+  </td>
+  <td>
+   Creates a new task under a todo. Required body params are todoId and task.
+  </td>
+  </tr>
+
+  <tr>
+<td>
+  /todo/alltasks/id
+  </td>
+  <td>
+  GET
+  </td>
+  <td>
+   Retrives all tasks associated with a todo.
+  </td>
+  </tr>
+
+  <tr>
+<td>
+  /tasks/id
+  </td>
+  <td>
+  GET
+  </td>
+  <td>
+   Retrives a specific task by id.
+  </td>
+  </tr>
+
+   <tr>
+<td>
+  /tasks/update/id
+  </td>
+  <td>
+  POST
+  </td>
+  <td>
+   update a specific task by id.
+  </td>
+  </tr>
+
+   <tr>
+<td>
+  /tasks/delete/id
+  </td>
+  <td>
+  DELETE
+  </td>
+  <td>
+   delets a specific task by id (soft delete).
+  </td>
+  </tr>
+  
+</tbody>
+
+</table>
+
+
+## Authentication clarifications
+
+ ### Authentication:
+
+Users need to register or login to access protected API endpoints (all except user/login and user/register).
+
+Login API (user/login) accepts email and password in the request body and returns a JWT token upon successful login.
+All other endpoints require a valid JWT token in the Authorization header with the Bearer scheme (e.g., Bearer your_jwt_token_here). 
+
+Usage Examples:
+ visit https://www.geeksforgeeks.org/how-to-add-bearer-token-authentication-in-postman/ to view how to added bearer token to postman for authentication.
+
+
+
+## NOTE
+Access the FULL API documentation at http://localhost:3000/api/. once the application is up and running successfully.
+
+
+ ## Reach out
+
+- Author - LAWRENCE OGEREKA
+- Email - lawrenceanthony70@gmail.com
+
+
+
+
+
+
+
+
+
