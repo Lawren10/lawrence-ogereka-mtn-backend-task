@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -30,6 +31,9 @@ export class TodoTasks {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
   @ManyToOne(() => Todo, (todo) => todo.tasks, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'todoId' })

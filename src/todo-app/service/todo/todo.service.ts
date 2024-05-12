@@ -47,4 +47,24 @@ export class TodoService {
       return false;
     }
   }
+
+  async retriveAllTaks(id: string) {
+    const tasks = await this.todoTable.findOne({ where: { id } });
+    const tasksArray = tasks?.tasks.map((task) => {
+      const { dueDate } = task;
+      const currentDate = new Date();
+      const taskDueDate = new Date(dueDate);
+
+      let taskValidTime: number = taskDueDate.getTime() - currentDate.getTime();
+      taskValidTime = taskValidTime / (1000 * 60 * 60);
+      if (taskValidTime <= 3) {
+        return { ...task, status: { status: task.status, color: 'red' } };
+      } else if (taskValidTime <= 24) {
+        return { ...task, status: { status: task.status, color: 'amber' } };
+      } else {
+        return { ...task, status: { status: task.status, color: 'green' } };
+      }
+    });
+    return tasksArray;
+  }
 }

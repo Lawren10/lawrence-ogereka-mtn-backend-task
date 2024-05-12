@@ -54,6 +54,24 @@ export class TodoController {
   }
 
   @ApiProperty()
+  @Get('alltask/:id')
+  @UseGuards(JwtGuard)
+  async getAllTask(@Res() res: Response, @Param('id') id: string) {
+    const tasks = await this.todoService.retriveAllTaks(id);
+    if (tasks) {
+      return res.status(HttpStatus.OK).json({
+        success: true,
+        tasks,
+      });
+    } else {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        success: false,
+        message: 'todo not found',
+      });
+    }
+  }
+
+  @ApiProperty()
   @Put('update/:id')
   @UseGuards(JwtGuard)
   async updateTodoById(

@@ -66,7 +66,6 @@ export class UsersService {
   }
 
   async retrieveAllUserTodos(userId: string) {
-    console.log(userId);
     const allTodos = await this.userTable.findOne({ where: { id: userId } });
     return allTodos?.todos;
   }

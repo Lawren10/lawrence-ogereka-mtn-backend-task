@@ -30,3 +30,23 @@ export class CreateTaskDetails {
   @IsNotEmpty()
   todoId: string;
 }
+
+export class UpdateTaskDetails {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @ApiProperty()
+  @IsString()
+  description: string;
+
+  @ApiProperty()
+  @IsDateString()
+  @IsNotEmpty()
+  dueDate: Date;
+
+  @IsString()
+  @IsNotEmpty()
+  status: string;
+}
