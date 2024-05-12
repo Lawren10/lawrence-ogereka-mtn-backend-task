@@ -19,7 +19,7 @@
  DATABASE_PASSWORD=your_password
  DATABASE_NAME=todo_db
  JWT_SECRET=your_jwt_secret (strong, random string for JWT signing)
- JWT_EXPIRATION_TIME=3600 (in seconds, e.g., 3600 for 1 hour)
+ JWT_EXPIRATION_TIME='3600' (in seconds, e.g., 3600 for 1 hour)
 
  ```
 - Install dependencies :
