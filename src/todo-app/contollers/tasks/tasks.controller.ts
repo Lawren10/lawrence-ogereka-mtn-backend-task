@@ -13,12 +13,9 @@ import {
 } from '@nestjs/common';
 import { ApiProperty } from '@nestjs/swagger';
 import { Response } from 'express';
-import {
-  CreateTaskDetails,
-  UpdateTaskDetails,
-} from 'src/todo-app/Dtos/tasks.dto';
-import { JwtGuard } from 'src/todo-app/auth/guards/jwtRoute.guard';
-import { TasksService } from 'src/todo-app/service/tasks/tasks.service';
+import { CreateTaskDetails, UpdateTaskDetails } from '../../Dtos/tasks.dto';
+import { JwtGuard } from '../../auth/guards/jwtRoute.guard';
+import { TasksService } from '../../service/tasks/tasks.service';
 
 @Controller('tasks')
 export class TasksController {

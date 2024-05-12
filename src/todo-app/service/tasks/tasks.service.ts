@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TodoTasks } from 'src/todo-app/database/tables/taskTable';
+import { TodoTasks } from '../../database/tables/taskTable';
 import { Repository } from 'typeorm';
 
 @Injectable()

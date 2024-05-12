@@ -14,9 +14,9 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiProperty } from '@nestjs/swagger';
 import { Request, Response } from 'express';
-import { CreateTodoDetails } from 'src/todo-app/Dtos/todo.dto';
-import { JwtGuard } from 'src/todo-app/auth/guards/jwtRoute.guard';
-import { TodoService } from 'src/todo-app/service/todo/todo.service';
+import { CreateTodoDetails } from '../../Dtos/todo.dto';
+import { JwtGuard } from '../../auth/guards/jwtRoute.guard';
+import { TodoService } from '../../service/todo/todo.service';
 
 @ApiBearerAuth()
 @Controller('todo')

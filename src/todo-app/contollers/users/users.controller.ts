@@ -9,15 +9,12 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import {
-  LoginUserDetails,
-  RegisterUserDetails,
-} from 'src/todo-app/Dtos/users.dto';
-import { UsersService } from 'src/todo-app/service/users/users.service';
-import { AuthenticateGuard } from 'src/todo-app/auth/guards/auth.guard';
+import { LoginUserDetails, RegisterUserDetails } from '../../Dtos/users.dto';
+import { UsersService } from '../../service/users/users.service'; //src/todo-app/service/users/users.service
+import { AuthenticateGuard } from '../../auth/guards/auth.guard'; //src/todo-app/auth/guards/auth.guard
 import { Request, Response } from 'express';
 import { ApiProperty } from '@nestjs/swagger';
-import { JwtGuard } from 'src/todo-app/auth/guards/jwtRoute.guard';
+import { JwtGuard } from '../../auth/guards/jwtRoute.guard'; //src/todo-app/auth/guards/jwtRoute.guard
 
 @Controller('user')
 export class UsersController {
@@ -30,7 +27,7 @@ export class UsersController {
   ) {
     const insertResponse = await this.usersService.registerUser(userDetails);
     if (insertResponse.inserted) {
-      return res.status(HttpStatus.OK).json(insertResponse);
+      return res.status(HttpStatus.CREATED).json(insertResponse);
     } else {
       res.status(HttpStatus.BAD_REQUEST).json(insertResponse);
     }

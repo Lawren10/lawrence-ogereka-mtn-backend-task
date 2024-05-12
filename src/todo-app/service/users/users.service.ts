@@ -2,17 +2,15 @@ import { Injectable } from '@nestjs/common';
 import {
   loginUserDetails,
   registerUserType,
-} from 'src/todo-app/utils/types/user.types';
+} from '../../utils/types/user.types'; //src/todo-app/utils/types/user.types
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from 'src/todo-app/database/tables/usersTable';
+import { User } from '../../database/tables/usersTable'; //src/todo-app/database/tables/usersTable
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
-  // constructor(private jwtService: JwtService) {}
-  //the jwt service is used to hash the usermane and password to create the token for login users and send to the client to save for next authentication.
   constructor(
     private jwtService: JwtService,
     @InjectRepository(User) private userTable: Repository<User>,
