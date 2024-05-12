@@ -11,6 +11,7 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 import { Response } from 'express';
 import {
   CreateTaskDetails,
@@ -23,6 +24,7 @@ import { TasksService } from 'src/todo-app/service/tasks/tasks.service';
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
+  @ApiProperty()
   @Post('create')
   @UseGuards(JwtGuard)
   async createTask(
@@ -36,6 +38,7 @@ export class TasksController {
     });
   }
 
+  @ApiProperty()
   @Get('/:id')
   @UseGuards(JwtGuard)
   async getTaskById(@Res() res: Response, @Param('id') id: string) {
@@ -53,6 +56,7 @@ export class TasksController {
     }
   }
 
+  @ApiProperty()
   @Put('/update/:id')
   @UseGuards(JwtGuard)
   async updateTaskById(
@@ -74,6 +78,7 @@ export class TasksController {
     }
   }
 
+  @ApiProperty()
   @Delete('/delete/:id')
   @UseGuards(JwtGuard)
   async deleteTaskById(@Res() res: Response, @Param('id') id: string) {
