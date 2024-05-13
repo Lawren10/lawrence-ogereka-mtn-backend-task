@@ -117,37 +117,37 @@ The main API endpoints are:
 
   <tr>
 <td>
-  /todo/id  
+  /todo/:id  
   </td>
   <td>
   GET
   </td>
   <td>
-   Retrives a single todo by id.
+   Retrives a single todo by id. Note:- the todo id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
 
 <tr>
 <td>
-  /todo/update/id 
+  /todo/update/:id 
   </td>
   <td>
   PUT
   </td>
   <td>
-   update a single todo by id.
+   update a single todo by id. Note:- the todo id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
 
   <tr>
 <td>
-  /todo/delete/id 
+  /todo/delete/:id 
   </td>
   <td>
   DELETE
   </td>
   <td>
-   Deletes a single todo by id.
+   Deletes a single todo by id. Note:- the todo id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
 
@@ -159,31 +159,31 @@ The main API endpoints are:
   POST
   </td>
   <td>
-   Creates a new task under a todo. Required body params are todoId and task.
+   Creates a new task under a todo. view the required fields in the swagger ui once application is up and running.
   </td>
   </tr>
 
   <tr>
 <td>
-  /todo/alltasks/id
+  /todo/alltasks/:id
   </td>
   <td>
   GET
   </td>
   <td>
-   Retrives all tasks associated with a todo.
+   Retrives all tasks associated with a todo. Note:- the todo id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
 
   <tr>
 <td>
-  /tasks/id
+  /tasks/:id
   </td>
   <td>
   GET
   </td>
   <td>
-   Retrives a specific task by id.
+   Retrives a specific task by id.Note:- the task id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
 
@@ -195,7 +195,7 @@ The main API endpoints are:
   POST
   </td>
   <td>
-   update a specific task by id.
+   update a specific task by id. the task id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
 
@@ -207,7 +207,7 @@ The main API endpoints are:
   DELETE
   </td>
   <td>
-   delets a specific task by id (soft delete).
+   delets a specific task by id (soft delete). the task id is to provided in palce of the (:id) in the endpoint
   </td>
   </tr>
   
